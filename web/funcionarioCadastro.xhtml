@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="templete.xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="proacao" value="#{MBFuncionarios.acao}" />
+            <f:viewParam name="procod" value="#{MBFuncionarios.codigo}" />
+            <f:event listener="#{MBFuncionarios.carregarCadastro()}" type="preRenderView"></f:event>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <h:form id="func">
+            <p:toolbar>
+                <f:facet name="Left">
+                    <h:outputText value="Funcionário"></h:outputText>
+                </f:facet>
+            </p:toolbar>
+
+               <!-- PAINEL PARA CAPITURA DE DADOS  -->
+            <p:panelGrid columns="2" id="funcio">
+                <p:outputLabel value="Código:"/>
+                <p:inputText maxlength="10" size="5" value="#{MBFuncionarios.funcionario.codigoFuncionario}"/>
+                <p:outputLabel value="Nome:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.nome}"/>
+                <p:outputLabel value="Cpf:" />
+                <p:inputMask mask="999.999.999-99" maxlength="20" size="30" value="#{MBFuncionarios.funcionario.cpf}"/>
+                <p:outputLabel value="Telefone:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.telefone}"/>
+                <p:outputLabel value="Email:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.email}"/>
+                <p:outputLabel value="cargo:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.cargo}"/>
+                <p:outputLabel value="Salario:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.salario}"/>
+                <p:outputLabel value="Estado:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.estado}"/>
+                <p:outputLabel value="Cidade:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.cidade}"/>
+                <p:outputLabel value="Bairro:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.bairro}"/>
+                <p:outputLabel value="Rua:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBFuncionarios.funcionario.rua}"/>
+                <p:outputLabel value="numero:" />
+                <p:inputText maxlength="20" size="30" value= "#{MBFuncionarios.funcionario.numero}"/>
+              <!-- PAINEL PARA COM OS BOTÕES DE NOVO, SALVA, EXCLUIR, E EDITAR OS DADOS  -->
+            </p:panelGrid>
+            <h:panelGrid columns="5">
+                <p:commandButton value="Novo" actionListener="#{MBFuncionarios.novo()}" update=" :func:funcio"   />
+                <p:commandButton value="Salvar" actionListener="#{MBFuncionarios.salvar()}" 
+                                 update=":msgGlobal :func:funcio" />
+                <p:commandButton value="Excluir" actionListener="#{MBFuncionarios.excluir()}" 
+                                 update=":msgGlobal" />
+                <p:commandButton value="Editar"  actionListener="#{MBFuncionarios.editar()}" 
+                                 update=":msgGlobal" />
+                <p:button value="Voltar" outcome="funcionarioPesquisa.xhtml" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:decorate>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="templete.xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="proacao" value="#{clienteBeans.acao}" />
+            <f:viewParam name="procod" value="#{clienteBeans.codigo}" />
+            <f:event listener="#{clienteBeans.carregarCadastro()}" type="preRenderView"></f:event>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <h:form id="frmproca">
+            <p:toolbar>
+                <f:facet name="Left">
+                    <h:outputText value="Cliente"></h:outputText>
+                </f:facet>
+            </p:toolbar>
+
+<!-- PAINEL PARA CAPITURA DE DADOS  -->
+            <p:panelGrid columns="2" id="pnproca">
+                <p:outputLabel value="Código:"/>
+                <p:inputText maxlength="3" size="5" value="#{clienteBeans.cliente.codigoCliente}"/>
+                <p:outputLabel value="Nome:" />
+                <p:inputText maxlength="50" size="30" value= "#{clienteBeans.cliente.nome}"/>
+                <p:outputLabel value="Email:" />
+                <p:inputText maxlength="70" size="30" value= "#{clienteBeans.cliente.email}"/>
+                <p:outputLabel value="Telefone:" />
+                <p:inputText maxlength="20" size="30" value= "#{clienteBeans.cliente.telefone}"/>
+                <p:outputLabel value="Estado:" />
+                <p:inputText maxlength="70" size="30" value= "#{clienteBeans.cliente.estado}"/>
+                <p:outputLabel value="Cidade:" />
+                <p:inputText maxlength="70" size="30" value= "#{clienteBeans.cliente.cidade}"/>
+                <p:outputLabel value="Bairro:" />
+                <p:inputText maxlength="70" size="30" value= "#{clienteBeans.cliente.bairro}"/>
+                <p:outputLabel value="Rua" />
+                <p:inputText maxlength="70" size="30" value= "#{clienteBeans.cliente.rua}"/>
+                <p:outputLabel value="Numero:" />
+                <p:inputText maxlength="10" size="30" value= "#{clienteBeans.cliente.numero}"/>
+            </p:panelGrid>
+<!-- PAINEL PARA COM OS BOTÕES DE NOVO, SALVA, EXCLUIR, E EDITAR OS DADOS  -->
+            <h:panelGrid columns="5">
+                <p:commandButton value="Novo" actionListener="#{clienteBeans.novo()}" update=" :frmproca:pnproca"   />
+                <p:commandButton value="Salvar" actionListener="#{clienteBeans.salvar()}" 
+                                 update=":msgGlobal :frmproca:pnproca" />
+                <p:commandButton value="Excluir" actionListener="#{clienteBeans.excluir()}" 
+                                 update=":msgGlobal" />
+                <p:commandButton value="Editar"  actionListener="#{clienteBeans.editar()}" 
+                                 update=":msgGlobal" />
+                <p:button value="Voltar" outcome="clientePesquisa.xhtml" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:decorate>

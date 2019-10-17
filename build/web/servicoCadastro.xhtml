@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="templete.xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="proacao" value="#{MBServico.acao}" />
+            <f:viewParam name="procod" value="#{MBServico.codigo}" />
+            <f:event listener="#{MBServico.carregarCadastro()}" type="preRenderView"></f:event>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <h:form id="Funcad">
+            <p:toolbar>
+                <f:facet name="Left">
+                    <h:outputText value="Serviço"></h:outputText>
+                </f:facet>
+            </p:toolbar>
+
+         <!-- PAINEL PARA CAPITURA DE DADOS  -->
+            <p:panelGrid columns="2" id="Funcpa">
+                <p:outputLabel value="Código:"/>
+                <p:inputText maxlength="10" size="5" value="#{MBServico.servico.codigoServico}"/>
+                <p:outputLabel value="Descrição:" />
+                <p:inputText maxlength="255" size="30" value= "#{MBServico.servico.descricaoServico}"/>
+                <p:outputLabel value="Valor:" />
+                <p:inputText maxlength="10" size="30" value= "#{MBServico.servico.valor}"/>
+                <p:outputLabel value="Data"></p:outputLabel> 
+                <p:calendar id="Data" value="#{MBServico.servico.data}"></p:calendar>
+                <p:outputLabel value="Cliente:" />  
+                <p:selectOneMenu  value="#{MBServico.servico.funcionarioidFuncionario}"  
+                                  converter="funcionarioConverter">
+                    <f:selectItem itemValue="" itemLabel="Selecione um Funcionario" />
+                    <f:selectItems value="#{MBServico.listaFuncionario}"  var="funcionario"
+                                   itemValue="#{funcionario}" itemLabel="#{funcionario.nome}" />
+                    <f:validateBean />
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+             <!-- PAINEL PARA COM OS BOTÕES DE NOVO, SALVA, EXCLUIR, E EDITAR OS DADOS  -->
+            <h:panelGrid columns="5">
+                <p:commandButton value="Novo" actionListener="#{MBServico.novo()}" update=" :Funcad:Funcpa"   />
+                <p:commandButton value="Salvar" actionListener="#{MBServico.salvar()}" 
+                                 update=":msgGlobal :Funcad:Funcpa" />
+                <p:commandButton value="Excluir" actionListener="#{MBServico.excluir()}" 
+                                 update=":msgGlobal" />
+                <p:commandButton value="Editar"  actionListener="#{MBServico.editar()}" 
+                                 update=":msgGlobal" />
+                <p:button value="Voltar" outcome="servicoPesquisa.xhtml" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:decorate>

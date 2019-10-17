@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="templete.xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="proacao" value="#{MBPlano.acao}" />
+            <f:viewParam name="procod" value="#{MBPlano.codigo}" />
+            <f:event listener="#{MBPlano.carregarCadastro()}"
+                     type="preRenderView"></f:event>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <h:form id="frmprocad">
+            <p:toolbar>
+                <f:facet name="Left">
+                    <h:outputText value="Planos"></h:outputText>
+                </f:facet>
+            </p:toolbar>
+               <!-- PAINEL PARA CAPITURA DE DADOS  -->
+            <p:panelGrid columns="2" id="pnprocad">
+                <p:outputLabel value="Código:"/>
+                <p:inputText maxlength="10" size="5" value="#{MBPlano.plano.codigoPlano}"/>
+                <p:outputLabel value="Nome:" />
+                <p:inputText maxlength="50" size="30" value= "#{MBPlano.plano.nome}"/>
+                <p:outputLabel value="Qt Mega:" />
+                <p:inputText maxlength="10" size="30" value= "#{MBPlano.plano.qtMega}"/>
+                <p:outputLabel value="Valor:" />
+                <p:inputText maxlength="10" size="30" value= "#{MBPlano.plano.valor}"/>
+                <p:outputLabel value="Cliente:" />  
+                <p:selectOneMenu  value="#{MBPlano.plano.clienteidCliente}"  
+                                  converter="clienteConverter">
+                    <f:selectItem itemValue="" itemLabel="Selecione um Cliente" />
+                    <f:selectItems value="#{MBPlano.listaCliente}"  var="cliente"
+                                   itemValue="#{cliente}" itemLabel="#{cliente.nome}" />
+                    <f:validateBean />
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+                <!-- PAINEL PARA COM OS BOTÕES DE NOVO, SALVA, EXCLUIR, E EDITAR OS DADOS  -->
+            <h:panelGrid columns="5">
+                <p:commandButton value="Novo" actionListener="#{MBPlano.novo()}" update=" :frmprocad:pnprocad"   />
+                <p:commandButton value="Salvar" actionListener="#{MBPlano.salvar()}" 
+                                 update=":msgGlobal :frmprocad:pnprocad" />
+                <p:commandButton value="Excluir" actionListener="#{MBPlano.excluir()}" 
+                                 update=":msgGlobal" />
+                <p:commandButton value="Editar"  actionListener="#{MBPlano.editar()}" 
+                                 update=":msgGlobal" />
+                <p:button value="Voltar" outcome="planoPesquisa.xhtml" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:decorate>

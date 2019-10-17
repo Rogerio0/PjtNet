@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="templete.xhtml">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:event listener="#{clienteBeans.prepararPesquisa()}" type="preRenderView"></f:event>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="conteudo">       
+        <h:form>
+            <p:toolbar>
+                <f:facet name="left">
+                    <h:outputText value="Cliente" />
+                </f:facet>
+            </p:toolbar>
+            <h:panelGrid columns="4">
+                <p:outputLabel value="Nome:" />
+                <p:inputText maxlength="50" size="30"/>
+                <p:button value="Buscar" />
+                <p:button value="Novo" outcome="cliente.xhtml" >
+                    <f:param name="proacao" value="Novo" />
+                </p:button>
+            </h:panelGrid>
+           <!-- TABELA PARA DEMOSTRAR OS DADOS  -->
+            <p:dataTable emptyMessage="Nenhum Registro Cadastrado" value="#{clienteBeans.itens}"
+                         filteredValue="#{clienteBeans.itensFiltrados}"
+                         var="cliente"
+                         rows="7"
+                         paginator="true"
+                         >
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{cliente.nome}" />
+                </p:column>
+                <p:column headerText="Telefone" >
+                    <h:outputText value="#{cliente.telefone}" />
+                </p:column>
+                <p:column  style="width:200px" headerText="Email" >
+                    <h:outputText value="#{cliente.email}" />
+                </p:column>
+                <p:column headerText="Estado" >
+                    <h:outputText value="#{cliente.estado}" />
+                </p:column>
+                <p:column headerText="Cidade" >
+                    <h:outputText value="#{cliente.cidade}" />
+                </p:column>
+                <p:column headerText="Bairro" >
+                    <h:outputText value="#{cliente.bairro}" />
+                </p:column>
+                <p:column headerText="Rua">
+                    <h:outputText value="#{cliente.rua}" />
+                </p:column>
+                <p:column headerText="Numero" >
+                    <h:outputText value="#{cliente.numero}" />
+                </p:column>
+
+                <p:column  style="width:100px" headerText="Opções">
+                    <p:button icon="ui-icon-pencil" outcome="cliente.xhtml" >
+                        <f:param name="procod" value="#{cliente.codigoCliente}" />
+                        <f:param name="proacao" value="Editar" />
+                    </p:button>
+                    <p:button icon="ui-icon-trash" outcome="cliente.xhtml" >
+                        <f:param name="procod" value="#{cliente.codigoCliente}" />
+                        <f:param name="proacao" value="Excluir" />
+                    </p:button>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:decorate>

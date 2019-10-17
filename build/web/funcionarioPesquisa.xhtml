@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="templete.xhtml">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:event listener="#{MBFuncionarios.prepararPesquisa()}" type="preRenderView"></f:event>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="conteudo">       
+
+        <h:form>
+            <p:toolbar>
+                <f:facet name="left">
+                    <h:outputText value="Funcionario" />
+                </f:facet>
+            </p:toolbar>
+            <h:panelGrid columns="4">
+                <p:outputLabel value="Funcionario:" />
+                <p:inputText maxlength="50" size="30"/>
+                <p:button value="Buscar" />
+                <p:button value="Novo" outcome="funcionarioCadastro.xhtml" >
+                    <f:param name="proacao" value="Novo" />
+                </p:button>
+            </h:panelGrid>
+
+            <p:dataTable emptyMessage="Nenhum Registro Cadastrado" value="#{MBFuncionarios.itens}"
+                         filteredValue="#{MBFuncionarios.itensFiltrados}"
+                         var="funcionario"
+                         rows="6"
+                         paginator="true"
+                         >
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{funcionario.nome}" />
+                </p:column>
+                <p:column style="width:125px" headerText="Telefone" >
+                    <h:outputText value="#{funcionario.telefone}" />
+                </p:column>
+                <p:column style="width:200px" headerText="Email" >
+                    <h:outputText value="#{funcionario.email}" />
+                </p:column>
+                <p:column headerText="Cargo" >
+                    <h:outputText value="#{funcionario.cargo}" />
+                </p:column>
+                <p:column headerText="Salario" >
+                    <h:outputText value="#{funcionario.salario}" />
+                </p:column>
+                <p:column headerText="Estado" >
+                    <h:outputText value="#{funcionario.estado}" />
+                </p:column>
+                <p:column headerText="Cidade" >
+                    <h:outputText value="#{funcionario.cidade}" />
+                </p:column>
+                <p:column headerText="Bairro" >
+                    <h:outputText value="#{funcionario.bairro}" />
+                </p:column>
+                <p:column headerText="Rua">
+                    <h:outputText value="#{funcionario.rua}" />
+                </p:column>
+                <p:column headerText="Numero" >
+                    <h:outputText value="#{funcionario.numero}" />
+                </p:column>
+                
+                <p:column  style="width:100px" headerText="Opções">
+                    <p:button icon="ui-icon-pencil" outcome="funcionarioCadastro.xhtml" >
+                        <f:param name="procod" value="#{funcionario.codigoFuncionario}" />
+                        <f:param name="proacao" value="Editar" />
+                    </p:button>
+                    <p:button icon="ui-icon-trash" outcome="funcionarioCadastro.xhtml" >
+                        <f:param name="procod" value="#{funcionario.codigoFuncionario}" />
+                        <f:param name="proacao" value="Excluir" />
+                    </p:button>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:decorate>

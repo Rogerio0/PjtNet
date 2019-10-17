@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="templete.xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="proacao" value="#{MBFornecedo.acao}" />
+            <f:viewParam name="procod" value="#{MBFornecedo.codigo}" />
+            <f:event listener="#{MBFornecedo.carregarCadastro()}" type="preRenderView"></f:event>
+        </f:metadata>
+    </ui:define>
+
+
+
+    <ui:define name="conteudo">
+        <h:form id="foncad">
+            <p:toolbar>
+                <f:facet name="Left">
+                    <h:outputText value="Fornecedo"></h:outputText>
+                </f:facet>
+            </p:toolbar>
+
+               <!-- PAINEL PARA CAPITURA DE DADOS  -->
+            <p:panelGrid columns="2" id="cadForn">
+                <p:outputLabel value="Código:"/>
+                <p:inputText maxlength="10" size="5" value="#{MBFornecedo.fornecedo.codigoFornecedo}"/>
+                <p:outputLabel value="Nome"/>
+                <p:inputText maxlength="50" size="30" value="#{MBFornecedo.fornecedo.nome}"/>
+                <p:outputLabel value="Descriçao:"/>
+                <p:inputText maxlength="150" size="30" value="#{MBFornecedo.fornecedo.descricao}"/>
+            </p:panelGrid>
+            <!-- PAINEL PARA COM OS BOTÕES DE NOVO, SALVA, EXCLUIR, E EDITAR OS DADOS  -->
+            <h:panelGrid columns="5">
+                <p:commandButton value="Novo" actionListener="#{MBFornecedo.novo()}" update=" :foncad:cadForn"   />
+                <p:commandButton value="Salvar" actionListener="#{MBFornecedo.salvar()}" 
+                                 update=":msgGlobal :foncad:cadForn" />
+                <p:commandButton value="Excluir" actionListener="#{MBFornecedo.excluir()}" 
+                                 update=":msgGlobal" />
+                <p:commandButton value="Editar"  actionListener="#{MBFornecedo.editar()}" 
+                                 update=":msgGlobal" />
+                <p:button value="Voltar" outcome="fornecedoPesquisa.xhtml" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:decorate>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             template="templete.xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:event listener="#{MBPlano.prepararPesquisa()}" 
+                     type="preRenderView" />
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="conteudo">
+        <h:form>
+            <p:toolbar>
+                <f:facet name="left">
+                    <h:outputText value="Planos" />
+                </f:facet>
+            </p:toolbar>
+            <h:panelGrid columns="4">
+                <p:outputLabel value="Plano:" />
+                <p:inputText maxlength="50" size="30"/>
+                <p:button value="Buscar" />
+                <p:button value="Novo" outcome="planoCadastro.xhtml" >
+                    <f:param name="proacao" value="Novo" />
+                </p:button>
+            </h:panelGrid>
+        <!-- TABELA PARA DEMOSTRAR OS DADOS  -->
+            <p:dataTable emptyMessage="Nenhum Registro Cadastrado" value="#{MBPlano.itens}"
+                         filteredValue="#{MBPlano.itensFiltrados}"
+                         var="plano"
+                         rows="6"
+                         paginator="true"
+                         >
+                <p:column style="width:50px" headerText="Código">
+                    <h:outputText value="#{plano.codigoPlano}" />
+                </p:column>
+                <p:column headerText="Cliente">
+                    <h:outputText value="#{plano.clienteidCliente.nome}" />
+                </p:column>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{plano.nome}" />
+                </p:column>
+                <p:column headerText="Valor" >
+                    <h:outputText value="#{plano.valor}" />
+                </p:column>
+                <p:column headerText="Quantidade" >
+                    <h:outputText value="#{plano.qtMega}" />
+                </p:column>
+
+                <p:column  style="width:100px" headerText="Opções">
+                    <p:button icon="ui-icon-pencil" outcome="planoCadastro.xhtml" >
+                        <f:param name="forcod" value="#{plano.codigoPlano}" />
+                        <f:param name="foracao" value="Editar" />
+                    </p:button>
+                    <p:button icon="ui-icon-trash" outcome="planoCadastro.xhtml" >
+                        <f:param name="procod" value="#{plano.codigoPlano}" />
+                        <f:param name="proacao" value="Excluir" />
+                    </p:button>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:decorate>
+
+
+
+

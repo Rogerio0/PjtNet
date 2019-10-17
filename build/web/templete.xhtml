@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<xhtml xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    ui-layout-unit-content
+
+    <ui:insert name="metadata" ></ui:insert> 
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:growl id="msgGlobal" sticky="true" >            
+        </p:growl>
+
+
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="100"  resizable="true" >
+                <h:outputText  value="Sistema Gerenciador de Internet" />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="100" resizable="true" >
+                <h:outputText value="Sistema Gerenciador de Internet" />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="200"  resizable="true" closable="true" collapsible="true">
+                <h:form>
+
+
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="Cadastro">
+
+                            <p:menuitem value="Cliente" url="cliente.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Fornecedor" url="fornecedoCadastro.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Funcionário" url="funcionarioCadastro.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Estoque" url="controleEstoqueCadastro.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Instalação" url="instalacaoCadastro.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Plano" url="planoCadastro.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Ordem De Serviço" url="servicoCadastro.xhtml" icon="pi pi-home" />
+
+
+                        </p:submenu>
+
+                        <p:separator />
+                        <p:submenu label="Pesquisa" >                            
+                            <p:menuitem value="Fornecedor" url="fornecedoPesquisa.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Funcionário" url="funcionarioPesquisa.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Cliente" url="clientePesquisa.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Plano" url="planoPesquisa.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Instalação" url="instalacaoPesquisa.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Estoque" url="EstoquePesquisa.xhtml" icon="pi pi-home" />
+                            <p:menuitem value="Ordem De Serviço" url="servicoPesquisa.xhtml" icon="pi pi-home" />
+
+                        </p:submenu>    
+                    </p:panelMenu>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+
+                <ui:insert name="conteudo" ></ui:insert>  
+                //page code
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+</xhtml>
+
